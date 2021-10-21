@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models.base import Model
-from django.db.models.fields import EmailField
 
 STATUS_CHOICE = (
     (0, 'draft'),
