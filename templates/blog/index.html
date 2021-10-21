@@ -1,5 +1,23 @@
 {% extends "blog/base.html" %}
 {% block page_title %}Index page{% endblock %}
 {% block page_content %}
-<p>{{ just_testing }}</p>
+<html>
+    <head>
+        <title>Home</title>   
+    </head>
+    <body>
+       <h1>Welcome to my blog</h1>      
+        {% for post in post %}
+        <h3>{{Post.title}}</h3>
+        <p>{{Post.body}}</p>
+        <h6>{{Post.category}}</h6>
+        <h5>{{Post.author}}</h5>
+        <h6>{{Post.status}}</h6>
+        <h5>{{Post.user}}</h5>
+        <h5>{{Post.created_at}}</h5>
+        <h5>{{Post.updated_at}}</h5>
+        {% endfor %}
+    </body>
+</html>
+
 {% endblock %}
