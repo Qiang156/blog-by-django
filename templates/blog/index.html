@@ -1,5 +1,20 @@
 {% extends "blog/base.html" %}
+
 {% block page_title %}Index page{% endblock %}
+
 {% block page_content %}
-<p>{{ just_testing }}</p>
+<html>
+    <head>
+        <title>Home</title>   
+    </head>
+    <body>
+       <h1>Welcome to my blog</h1>      
+        {% for post in posts %}
+            <p>
+                <h3>{{post.title}}</h3>
+                {# {% autoescape off %}{{post.body}}{% endautoescape %} #}
+            </p>
+        {% endfor %}
+    </body>
+</html>
 {% endblock %}

@@ -1,5 +1,4 @@
-from django.db import models
-from django.db.models.base import Model
+from django.db import connection, models
 
 STATUS_CHOICE = (
     (0, 'draft'),
