@@ -1,23 +1,34 @@
 {% extends "blog/base.html" %}
 {% block page_title %}Index page{% endblock %}
 {% block page_content %}
-<html>
-    <head>
-        <title>Home</title>   
-    </head>
-    <body>
-       <h1>Welcome to my blog</h1>      
-        {% for post in post %}
-        <h3>{{Post.title}}</h3>
-        <p>{{Post.body}}</p>
-        <h6>{{Post.category}}</h6>
-        <h5>{{Post.author}}</h5>
-        <h6>{{Post.status}}</h6>
-        <h5>{{Post.user}}</h5>
-        <h5>{{Post.created_at}}</h5>
-        <h5>{{Post.updated_at}}</h5>
-        {% endfor %}
-    </body>
-</html>
+
+<h1 style="text-align: center;">Welcome to My Blog</h1> 
+    <div class="container">
+        <div class="row">                
+        {% for post in post_list %}
+        <header class="entry-header">  
+        <div class="col-lg-6 col-md-12">
+            <div style="border: 1pm;">
+                <h3 style="text-align: center;"><a href="single.html">{{post.title}}</a></h3>
+                <h5 style="float: right;">Author: <i>{{post.author}}</i></h5>
+                <h5 style="float: right;">Date: {{post.created_at}}</h5>
+                <h6 style="float: right;">Status: {{post.status}}</h6>
+                <h5 style="float: right;">Update: {{post.updated_at}}</h5> 
+                <h6 style="float: right;"><a href="/">{{post.category}}</a></h6>                                                                                 
+            </div>
+        </header>
+        <div class="entry-content clearfix" >
+            <div style="margin: 10px; height: 100px;">
+                <div style="overflow: hidden; text-overflow: ellipsis; 
+                            display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical;">
+                             {{post.body}}
+                </div>
+            </div>                 
+        </div>
+        </div>
+    {% endfor %}
+        </div>
+    </div>       
+
 
 {% endblock %}

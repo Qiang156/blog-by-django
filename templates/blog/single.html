@@ -1,0 +1,10 @@
+{% extends "blog/base.html" %}
+
+{% block main %}
+{% if query %}
+{% for result in page.object_list %}
+{% endfor %}
+{% endif %}
+    
+{% endblock %}
+ 
