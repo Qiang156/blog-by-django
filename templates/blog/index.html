@@ -1,20 +1,19 @@
 {% extends "blog/base.html" %}
 
-{% block page_title %}Index page{% endblock %}
+{% block title %}Index page{% endblock %}
 
-{% block page_content %}
-<html>
-    <head>
-        <title>Home</title>   
-    </head>
-    <body>
-       <h1>Welcome to my blog</h1>      
-        {% for post in posts %}
-            <p>
-                <h3>{{post.title}}</h3>
-                {# {% autoescape off %}{{post.body}}{% endautoescape %} #}
-            </p>
-        {% endfor %}
-    </body>
-</html>
+{% block content %}
+
+<div class="container">
+{% for post in posts %}
+    <article class="blog-post">
+    <h2 class="blog-post-title"><a href="/blog/{{post.id}}">{{post.title}}</a></h2>
+
+    <p class="blog-post-meta">
+    <a href="/blog/category/{{post.category}}">{{ post.category|capfirst }}</a> / {{ post.created_at|date:"Y-m-d H:i"}} by <a href="/blog/user/{{post.author}}">{{post.author}}</a></p>
+    </article>
+    <hr />
+{% endfor %}
+</div>
+
 {% endblock %}

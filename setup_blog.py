@@ -1,6 +1,12 @@
 import os
 import sys
 import json
+import sqlite3
+import random
+
+
+from blog_project.settings import DATABASES
+
 
 
 def main():
@@ -15,21 +21,51 @@ def main():
     # from django.db import transaction
         
     from blog.models import User, Category, Post
+    from django.conf import settings
 
-    """"
-    delete all data exist
-    """
-    User.objects.all().delete()
-    Category.objects.all().delete()
-    Post.objects.all().delete()
+    # -------------------------------------------------------------
+    # delete all data exist
+    # sqlite_sequence just for SQLite
+    # -------------------------------------------------------------
+    if settings.DATABASES['default']['ENGINE'].index('sqlite3'):
+        con= sqlite3.connect("./db.sqlite3")
+        cursor = con.cursor()
+        cursor.execute('DELETE FROM blog_categories')
+        cursor.execute('DELETE FROM blog_users')
+        cursor.execute('DELETE FROM blog_posts')
+        cursor.execute('UPDATE sqlite_sequence SET seq = 0 WHERE name="blog_users"')
+        cursor.execute('UPDATE sqlite_sequence SET seq = 0 WHERE name="blog_categories"')
+        cursor.execute('UPDATE sqlite_sequence SET seq = 0 WHERE name="blog_posts"')
+        con.commit()
+        con.close()
+    else:
+        User.objects.all().delete();
+        Category.objects.all().delete();
+        Post.objects.all().delete();
+    # -------------------------------------------------------------
 
     category_list = ['general','community','interviews','meta','security']
 
-    userdata = {
-        'name':'admin', 'password':'88888888', 'real_name':'Administrator',
+    userData = [{
+        'name':'Johan', 'password':'88888888', 'real_name':'Johan',
+        'gender':1, 'email':'Johan@gmail.com'
+    },{
+        'name':'Qiang', 'password':'88888888', 'real_name':'Qiang',
         'gender':1, 'email':'admin@gmail.com'
-    }
-    user = User.objects.create(**userdata)
+    },{
+        'name':'Magdaleda', 'password':'88888888', 'real_name':'Magdaleda',
+        'gender':1, 'email':'Magdaleda@gmail.com'
+    },{
+        'name':'Yali', 'password':'88888888', 'real_name':'Yali',
+        'gender':1, 'email':'Yali@gmail.com'
+    },{
+        'name':'Raul', 'password':'88888888', 'real_name':'Raul',
+        'gender':1, 'email':'Raul@gmail.com'
+    }]
+    userList = []
+    for item in userData:
+        userList.append(User.objects.create(**item))
+
     key = 0
     for value in category_list:
         key = key + 1
@@ -41,7 +77,7 @@ def main():
                 post = Post(title=post['title'],
                             body=post['content'],
                             category=category,
-                            author=user,
+                            author=userList[random.randint(0,4)],
                             status=1)
                 post.save()
 
