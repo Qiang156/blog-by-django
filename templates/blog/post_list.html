@@ -1,0 +1,14 @@
+{% extends "blog/base.html" %}
+{% block page_title %}Index page{% endblock %}
+{% block page_content %}
+<ul>
+    {% for post in posts %}
+    <li><h1>{{ post.title }}</h1></li>
+    {{post.body|slice:":200"|safe }} </br>
+    <h3>{{post.author }}</h3></br>
+    <a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-secondary" role="button">Read more</a>
+    <hr>
+    {% endfor %}
+       
+</ul>
+{% endblock %}
