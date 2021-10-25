@@ -1,13 +1,7 @@
 import os
-import sys
 import json
 import sqlite3
 import random
-
-
-from blog_project.settings import DATABASES
-
-
 
 def main():
     """Run administrative tasks."""
@@ -22,6 +16,7 @@ def main():
         
     from blog.models import User, Category, Post
     from django.conf import settings
+    from django.contrib.auth.models import User
 
     # -------------------------------------------------------------
     # delete all data exist
@@ -31,40 +26,34 @@ def main():
         con= sqlite3.connect("./db.sqlite3")
         cursor = con.cursor()
         cursor.execute('DELETE FROM blog_categories')
-        cursor.execute('DELETE FROM blog_users')
+        # cursor.execute('DELETE FROM blog_users')
+        cursor.execute('DELETE FROM auth_user where is_superuser != 1')
         cursor.execute('DELETE FROM blog_posts')
-        cursor.execute('UPDATE sqlite_sequence SET seq = 0 WHERE name="blog_users"')
+        # cursor.execute('UPDATE sqlite_sequence SET seq = 0 WHERE name="blog_users"')
+        cursor.execute('UPDATE sqlite_sequence SET seq = 0 WHERE name="auth_user"')
         cursor.execute('UPDATE sqlite_sequence SET seq = 0 WHERE name="blog_categories"')
         cursor.execute('UPDATE sqlite_sequence SET seq = 0 WHERE name="blog_posts"')
         con.commit()
         con.close()
     else:
-        User.objects.all().delete();
-        Category.objects.all().delete();
-        Post.objects.all().delete();
+        User.objects.all().delete()
+        Category.objects.all().delete()
+        Post.objects.all().delete()
     # -------------------------------------------------------------
 
     category_list = ['general','community','interviews','meta','security']
 
-    userData = [{
-        'name':'Johan', 'password':'88888888', 'real_name':'Johan',
-        'gender':1, 'email':'Johan@gmail.com'
-    },{
-        'name':'Qiang', 'password':'88888888', 'real_name':'Qiang',
-        'gender':1, 'email':'admin@gmail.com'
-    },{
-        'name':'Magdaleda', 'password':'88888888', 'real_name':'Magdaleda',
-        'gender':1, 'email':'Magdaleda@gmail.com'
-    },{
-        'name':'Yali', 'password':'88888888', 'real_name':'Yali',
-        'gender':1, 'email':'Yali@gmail.com'
-    },{
-        'name':'Raul', 'password':'88888888', 'real_name':'Raul',
-        'gender':1, 'email':'Raul@gmail.com'
-    }]
+    userData = [
+        ('Johan', 'Johan@gmail.com', '88888888'),
+        ('Qiang', 'admin@gmail.com', '88888888'),
+        ('Magdaleda', 'Magdaleda@gmail.com','88888888'),
+        ('Yali', 'Yali@gmail.com', '88888888'),
+        ('Raul', 'Raul@gmail.com', '88888888')
+    ]
+    
     userList = []
     for item in userData:
-        userList.append(User.objects.create(**item))
+        userList.append(User.objects.create_user(item[0],item[1],item[2]))
 
     key = 0
     for value in category_list:

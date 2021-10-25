@@ -1,58 +1,11 @@
-from django.db import connection, models
+from django.db import models
+from django.contrib.auth.models import User
 
 STATUS_CHOICE = (
     (0, 'draft'),
     (1, 'published'),
     (2, 'deleted'),
 )
-
-GENDER_CHOICE = (
-    (0, 'None'),
-    (1, 'Male'),
-    (2, 'Female'),
-)
-
-
-# ----------------------------------------------------
-class User(models.Model):
-    """
-    User
-    """
-    name = models.CharField(verbose_name="User Name",
-                            unique=True,
-                            max_length=30,
-                            null=False,
-                            blank=False)
-
-    password = models.CharField(verbose_name='Password',
-                                max_length=32,
-                                null=False,
-                                blank=False)
-
-    real_name = models.CharField(verbose_name="Real Name",
-                                 unique=True,
-                                 max_length=30,
-                                 null=False,
-                                 blank=False)
-
-    gender = models.SmallIntegerField(verbose_name="Gender",
-                                      choices=GENDER_CHOICE)
-
-    email = models.EmailField(verbose_name="Email",
-                              unique=True,
-                              max_length=100,
-                              null=False,
-                              blank=False)
-
-    def __str__(self) -> str:
-        return self.name
-
-    def getGender(self):
-        return GENDER_CHOICE[self.gender][1]
-
-    class Meta:
-        db_table = "blog_users"
-
 
 # ----------------------------------------------------
 class Category(models.Model):
