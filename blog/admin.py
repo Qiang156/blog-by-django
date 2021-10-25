@@ -7,9 +7,9 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'sort')
 
 
-@admin.register(User)
+""" @admin.unregister(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'real_name', 'gender', 'email')
+    list_display = ('id', 'name', 'real_name', 'gender', 'email') """
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
