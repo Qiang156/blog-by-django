@@ -3,6 +3,11 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
+    url(r'^$', views.index, name="index"),
+    url("index", views.index),
+
+    url(r"(?P<id>\d+)/",views.post_detail),
+    
     url(r'^post_list/', views.post_list, name="post_list"),
-    url(r'^(?P<pk>\w+)', views.post_detail, name='post_detail'),
+    url(r"user/<id>\d+", views.user_show),
 ]
