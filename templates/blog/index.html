@@ -1,59 +1,67 @@
 {% extends "blog/base.html" %}
 
-{% block page_title %}Index page{% endblock %}
+{% block title %}Index page{% endblock %}
+
+{% block content %}
+
+<div class="container">
+{% for post in posts %}
+    <article class="blog-post">
+    <h2 class="blog-post-title"><a href="/blog/{{post.id}}">{{post.title}}</a></h2>
+
+    <p class="blog-post-meta">
+    <a href="/blog/category/{{post.category}}">{{ post.category|capfirst }}</a> / {{ post.created_at|date:"Y-m-d H:i"}} by <a href="/blog/user/{{post.author}}">{{post.author}}</a></p>
+    </article>
+    <hr />
+{% endfor %}
+</div>
 
 {% block page_content %}
 
-
-
-
-
-
-<h1 style="text-align: center;">Welcome to My Blog</h1> 
-    
-        <div class="container">
-            <div class="row">  
-                <div class="col-lg-10">            
-                    {% for post in posts %}
-                    {% if post.status == 1 %}
-                    <div class="row">   
-                        <div class="col-lg-12">
-                            <div style="border-style: solid; margin: 10px;">
-                                <h3 style="text-align: center;"><a href="{% url 'blog:getPost' post.id %}">{{post.title}}</a></h3>
-                                <div style="margin-left: 15px;">
-                                    <h5 style="text-align: left;">Author: <i>{{post.author}}</i></h5>                               
-                                </div>
-                                <div style="margin-left: 15px;margin-right: 15px; display: block;">
-                                    <div style="text-align: left; display: inline-block;">
-                                        <h6>Date: {{post.created_at}}</h6>
-                                    </div>
-                                    <div style="float: right; ">
-                                        <a href="/">Category: {{post.category}}</a>
-                                    </div>
-                                </div>
-                                <div style="margin: 15px; height: 100px; display: inline-block;">
-                                    <div style="overflow: hidden; text-overflow: ellipsis; 
-                                                display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical;">
-                                                {{post.body}}
-                                    </div>
-                                </div>                                                                               
-                            </div>                
+<h1 style="text-align: center;">Welcome to My Blog</h1>     
+<div class="container">
+    <div class="row">  
+        <div class="col-lg-10">            
+            {% for post in posts %}
+            {% if post.status == 1 %}
+            <div class="row">   
+                <div class="col-lg-12">
+                    <div style="border-style: solid; margin: 10px;">
+                        <h3 style="text-align: center;"><a href="{% url 'blog:getPost' post.id %}">{{post.title}}</a></h3>
+                        <div style="margin-left: 15px;">
+                            <h5 style="text-align: left;">Author: <i>{{post.author}}</i></h5>                               
                         </div>
-                    </div>
-                    {% endif %}
-                    {% endfor %}
+                        <div style="margin-left: 15px;margin-right: 15px; display: block;">
+                            <div style="text-align: left; display: inline-block;">
+                                <h6>Date: {{post.created_at}}</h6>
+                            </div>
+                            <div style="float: right; ">
+                                <a href="/">Category: {{post.category}}</a>
+                            </div>
+                        </div>
+                        <div style="margin: 15px; height: 100px; display: inline-block;">
+                            <div style="overflow: hidden; text-overflow: ellipsis; 
+                                        display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical;">
+                                        {{post.body}}
+                            </div>
+                        </div>                                                                               
+                    </div>                
                 </div>
-                <div class="col-lg-2">
-                    <h5>Category: </h5>
-                    <ul>
-                        {% for category in category_list %}
-                            <li>
-                                <a href="/">{{category.name}}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>   
-                </div>  
-            </div>        
-        </div>    
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="col-lg-2">
+            <h5>Category: </h5>
+            <ul>
+                {% for category in category_list %}
+                    <li>
+                        <a href="/">{{category.name}}</a>
+                    </li>
+                {% endfor %}
+            </ul>   
+        </div>  
+    </div>        
+</div>    
 
 {% endblock %}

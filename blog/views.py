@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from blog.models import Post
+from django.shortcuts import render, get_object_or_404
+from blog.models import Post,User,Category
 
 def index(request):
     posts = Post.objects.all()
@@ -14,11 +14,13 @@ def post_list(request):
     context = { "posts" : list_of_posts }
     return render(request, 'blog/post_list.html', context)
     
-def post_detail(request, pk):
-    post = Post.objects.get(pk=pk)
-    return render(request, 'blog/post_detail.html', {'post': post})
-from blog.models import Category, Post
+def post_detail(request, id):
+    post = get_object_or_404(Post, pk=id)
+    return render(request, 'blog/detail.html', {'post': post})
 
+def user_show(request, id):    
+    post = get_object_or_404(User, pk=id)
+    return render(request, 'blog/user.html', {'post': post})
 
 #def index(request):
     #post_list = Post.objects.all().order_by('-created_at')
