@@ -1,0 +1,19 @@
+{% extends "blog/base.html" %}
+{% block page_title %}Index page{% endblock %}
+{% block page_content %}
+
+<h1>{{ post.title }}</h1></br>
+{{ post.body|safe }} </br>
+<h3>{{ post.author }}</h3></br>
+<p>Post created on {{ post.created_at }}</p>
+<p>Post updated on {{ post.updated_at }}</p>
+{% if post.status == 1 %}
+    <p>Status <em>published</em> </p>
+{% elif post.status == 0 %}
+    <p>Status <em>draft</em> </p>
+{% else  %}
+    <p>Status <em>deleted</em> </p>
+{% endif %}
+    
+
+{% endblock %}
