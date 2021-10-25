@@ -2,12 +2,15 @@ from django.shortcuts import render, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.core.exceptions import PermissionDenied
-from blog.models import Post, User
+from blog.models import Post, User, Category
 from blog.forms import PostForm
 
 def index(request):
-    context = { "just_testing" : "Hello!" }
-    return render(request, "blog/index.html", context)
+    posts = Post.objects.all()
+    post_list = Post.objects.all().order_by('-created_at')
+    category_list = Category.objects.all()
+    context = { "posts" : posts ,'post_list1': post_list, 'category_list': category_list} 
+    return render(request, "blog/index.html", context )
 
 # To do: Later, when user can log in, we should add decorator @login_required
 def edit_post(request, pk=0):
@@ -74,3 +77,20 @@ def edit_post(request, pk=0):
 
     # Finally, render the page using template edit_post.html
     return render(request, "blog/edit_post.html", context)
+ 
+def post_list(request):
+    list_of_posts = Post.objects.order_by("created_at")
+    context = { "posts" : list_of_posts }
+    return render(request, 'blog/post_list.html', context)
+    
+def post_detail(request, id):
+    post = get_object_or_404(Post, pk=id)
+    return render(request, 'blog/detail.html', {'post': post})
+
+def user_show(request, id):    
+    post = get_object_or_404(User, pk=id)
+    return render(request, 'blog/user.html', {'post': post})
+
+def getPost(request, post_id):
+    currentPost = Post.objects.get(id = post_id)
+    return render(request, 'blog/viewPost.html', context={'post': currentPost})

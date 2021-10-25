@@ -2,25 +2,26 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>{% block page_title %}{% endblock %}</title>
+        <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        {% block css %}{% endblock %}
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="index">Blog project</a>
+            <a class="navbar-brand" href="{% url 'index' %}">Blog project</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                      <a class="nav-link" href="index">Index page</a>
+                      <a class="nav-link" href="{% url 'index' %}">Index page</a>
                     </li>
                     <!--
                         The following three menu items are just placeholders
                     -->
                     <li class="nav-item">
-                      <a class="nav-link" href="view_blog_posts">View blog posts</a>
+                      <a class="nav-link" href="/">View blog posts</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="edit_blog_posts">Edit blog posts</a>
@@ -37,5 +38,6 @@
         </div>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        {% block javascript %}{% endblock %}
     </body>
 </html>
