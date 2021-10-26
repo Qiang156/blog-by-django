@@ -28,20 +28,40 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'blog:edit_post' %}">Edit blog posts</a>
-                      </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'blog:register' %}">Register</a>
                     </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navCategory" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+                        <div class="dropdown-menu" aria-labelledby="navCategory">
+                        {% for category in category_list %}
+                            <a class="dropdown-item" href="/blog/category/{{category.name}}">{{category.name|capfirst}}</a>
+                        {% endfor %}
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navUser" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Users</a>
+                        <div class="dropdown-menu" aria-labelledby="navUser">
+                        {% for user in user_list %}
+                            <a class="dropdown-item" href="/blog/user/{{user.username}}">{{user.username|capfirst}}</a>
+                        {% endfor %}
+                        </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">                    
                     {% if user.is_authenticated %}
-                        <li>
+                        <li class="nav-item pull-right">
                             <a class= "nav-link" href="{% url 'logout' %}">Logout</a>
                         </li>
                     {% else %}
-                        <li>
-                        <a class= "nav-link" href="{% url 'blog:login' %}">Login</a>
+                        <li class="nav-item pull-right">
+                            <a class= "nav-link" href="{% url 'blog:login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'blog:register' %}">Register</a>
                         </li>
                     {% endif %}                    
-                    </ul>
+                </ul>
             </div>
         </nav>
         <div class="jumbotron">

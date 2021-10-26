@@ -14,7 +14,8 @@ def index(request):
     posts = Post.objects.all()
     post_list = Post.objects.all().order_by('-created_at')
     category_list = Category.objects.all()
-    context = { "posts" : posts ,'post_list1': post_list, 'category_list': category_list} 
+    user_list = User.objects.filter(is_superuser=False).order_by('username')
+    context = { "posts" : posts ,'post_list1': post_list, 'category_list': category_list,'user_list':user_list} 
     return render(request, "blog/index.html", context )
 
 # To do: Later, when user can log in, we should add decorator @login_required
@@ -103,14 +104,15 @@ def user_show(request, id):
 def getPost(request, post_id):
     currentPost = Post.objects.get(id = post_id)
     return render(request, 'blog/viewPost.html', context={'post': currentPost})
+    
 def user_login(request):
 
     if request.method == 'POST':
         username = request.POST.get('name')
         password = request.POST.get('password')
-        print(username, password)
+
         user = authenticate(username=username, password=password)
-        print(user)
+
         if user:
             if user.is_active:
                 login(request, user)
