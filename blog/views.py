@@ -34,7 +34,7 @@ def edit_post(request, pk=0):
             if request.method == "GET":
                 # Just show empty form for user to fill out
                 post_form = PostForm()
-                post_form_action = reverse("edit_post") + "0"
+                post_form_action = reverse("blog:edit_post") + "0"
             elif request.method == "POST":
                 # Save form data entered by user
                 post_form = PostForm(request.POST)
@@ -42,7 +42,7 @@ def edit_post(request, pk=0):
                     post = post_form.save(commit=False)
                     post.author = logged_in_user
                     post.save()
-                    return HttpResponseRedirect(reverse("edit_post") + str(post.id))
+                    return HttpResponseRedirect(reverse("blog:edit_post") + str(post.id))
                 else:
                     # Oops, some error, add handler later
                     pass
@@ -57,13 +57,13 @@ def edit_post(request, pk=0):
                 if request.method == "GET":
                     # Just show form for user to edit
                     post_form = PostForm(instance=post)
-                    post_form_action = reverse("edit_post") + str(pk)
+                    post_form_action = reverse("blog:edit_post") + str(pk)
                 elif request.method == "POST":
                     # Save form data edited by user
                     post_form = PostForm(request.POST, instance=post)
                     if post_form.is_valid():
                         post = post_form.save(commit=True)
-                        return HttpResponseRedirect(reverse("edit_post") + str(pk))
+                        return HttpResponseRedirect(reverse("blog:edit_post") + str(pk))
                     else:
                         # Oops, some error, add handler later
                         pass

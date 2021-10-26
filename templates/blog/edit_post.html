@@ -23,9 +23,11 @@
         {{ post_form.as_p }}
         {% csrf_token %}
         <p><input type="submit" value="Save" class="btn btn-primary"></p>
-        <p><label>Post written by:</label> {{ post_form.instance.author }}</p>
-        <p><label>Created at:</label> {{ post_form.instance.created_at }}</p>
-        <p><label>Updated at:</label> {{ post_form.instance.updated_at }}</p>
+        {% if post_form.instance.author %}
+            <p><label>Post written by:</label> {{ post_form.instance.author }}</p>
+            <p><label>Created at:</label> {{ post_form.instance.created_at }}</p>
+            <p><label>Updated at:</label> {{ post_form.instance.updated_at }}</p>
+        {% endif %}
     </form>
 {% else %}
     <p>Oops, something is wrong ...</p>
