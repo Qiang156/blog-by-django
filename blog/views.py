@@ -19,13 +19,17 @@ def index(request):
     return render(request, "blog/index.html", context )
 
 # To do: Later, when user can log in, we should add decorator @login_required
+# Now == Later. Login functionality has been added 
+@login_required
 def edit_post(request, pk=0):
     # Same function for adding new blog post and editing existing blog post
     # And yes, maybe the code can be more efficient or shorter,
     # but the structure used is to make it clearer for human readers
 
     # NB! This line should be changed later, to get the real logged in user
-    logged_in_user = User.objects.get(id=1)
+    #logged_in_user = User.objects.get(id=1)
+    # Now == Later. Get the real logged in user
+    logged_in_user = request.user
 
     if pk == "":
         # The url was /blog/edit_post/, without any pk value
