@@ -101,6 +101,9 @@ def getPost(request, post_id):
     return render(request, 'blog/viewPost.html', context={'post': currentPost})
     
 def user_login(request):
+    error = False   ## flag errors
+    message = ""
+    context = {}
 
     if request.method == 'POST':
         username = request.POST.get('name')
@@ -113,12 +116,18 @@ def user_login(request):
                 login(request, user)
                 return HttpResponseRedirect(reverse('index'))
             else:
-                return HttpResponse('ACCOUNT NOT ACTIVE')
+                error = True
+                message = 'Account not Active'
         else:
-            print('Login failed. Please verify your credentials')
-            return HttpResponse('Invalid login')
+            error = True
+            message = 'Login failed. Please verify your credentials'
     else:
-        return render(request, 'blog/login.html', {})
+        pass
+
+    if error:
+        context = {'error': error, 'message' : message}
+        
+    return render(request, 'blog/login.html', context)
 
 @login_required
 def user_logout(request):
@@ -128,6 +137,7 @@ def user_logout(request):
 
 def register(request):
     registered = False
+    username = ''
 
     if request.method == "POST":
         user_form = UserRegisterForm(data=request.POST)
@@ -137,10 +147,13 @@ def register(request):
             user.set_password(user.password)
             user.save()
 
+            username = user.username
             registered = True
         else:
             print(user_form.errors)
     else:
         user_form = UserRegisterForm()        
 
-    return render(request, 'blog/register.html', {'user_form': user_form, 'registered': registered})
+    context = {'user_form': user_form, 'username' : username, 'registered': registered}
+
+    return render(request, 'blog/register.html', context)
