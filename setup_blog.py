@@ -46,7 +46,7 @@ def main():
     userData = [
         ('Johan', 'Johan@gmail.com', '88888888'),
         ('Qiang', 'admin@gmail.com', '88888888'),
-        ('Magdaleda', 'Magdaleda@gmail.com','88888888'),
+        ('Magdalena', 'Magdaleda@gmail.com','88888888'),
         ('Yali', 'Yali@gmail.com', '88888888'),
         ('Raul', 'Raul@gmail.com', '88888888')
     ]
