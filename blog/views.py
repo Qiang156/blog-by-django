@@ -99,14 +99,15 @@ def user_show(request, id):
 def getPost(request, post_id):
     currentPost = Post.objects.get(id = post_id)
     return render(request, 'blog/viewPost.html', context={'post': currentPost})
+    
 def user_login(request):
 
     if request.method == 'POST':
         username = request.POST.get('name')
         password = request.POST.get('password')
-        print(username, password)
+
         user = authenticate(username=username, password=password)
-        print(user)
+
         if user:
             if user.is_active:
                 login(request, user)
