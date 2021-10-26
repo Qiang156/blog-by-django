@@ -23,5 +23,4 @@ urlpatterns = [
     url(r'^index/', views.index, name="index"),    
     url(r'^admin/', admin.site.urls),
     url(r'^blog/', include("blog.urls", namespace="blog")),
-    url(r'^logout/$', views.user_logout, name='logout'),
 ]

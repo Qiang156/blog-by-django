@@ -18,7 +18,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                      <a class="nav-link" href="{% url 'index' %}">Index page</a>
+                      <a class="nav-link" href="{% url 'index' %}">Home</a>
                     </li>
                     <!--
                         The following three menu items are just placeholders
@@ -51,7 +51,7 @@
                 <ul class="navbar-nav ml-auto">                    
                     {% if user.is_authenticated %}
                         <li class="nav-item pull-right">
-                            <a class= "nav-link" href="{% url 'logout' %}">Logout</a>
+                            <a class= "nav-link" href="{% url 'blog:logout' %}">Logout</a>
                         </li>
                     {% else %}
                         <li class="nav-item pull-right">
