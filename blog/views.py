@@ -14,7 +14,8 @@ def index(request):
     posts = Post.objects.all()
     post_list = Post.objects.all().order_by('-created_at')
     category_list = Category.objects.all()
-    context = { "posts" : posts ,'post_list1': post_list, 'category_list': category_list} 
+    user_list = User.objects.filter(is_superuser=False).order_by('username')
+    context = { "posts" : posts ,'post_list1': post_list, 'category_list': category_list,'user_list':user_list} 
     return render(request, "blog/index.html", context )
 
 # To do: Later, when user can log in, we should add decorator @login_required
