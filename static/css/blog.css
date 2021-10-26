@@ -10,3 +10,6 @@ label{
     width:150px;
 }
 
+ul.errorlist.nonfield li {
+    color: rgb(168, 57, 57);
+}
