@@ -2,19 +2,23 @@
 {% load staticfiles %}
 
 {% block page_content %}
-<div class="jumbotron">
-    <h2 class="mb-5">Blog Login</h2>
-    <form action="{% url 'blog:login' %}" method="POST">
-        {% csrf_token %}
-        <p>    
-            <label for="name">Username:</label>
-            <input type="text" name="name"  placeholder="Enter username">
-        </p>
-        <p>
-            <label for="password">Password:</label>
-            <input type="password" name="password" placeholder="Enter password">
-        </p>        
-        <input type="submit" value="Login">
-    </form>
+<div class="container m-auto">
+    {% if error %}
+        <h2 class="mb-5">{{ message }}</h2>
+    {% else %}
+        <h2 class="mb-5">Blog Login</h2>
+        <form action="{% url 'blog:login' %}" method="POST">
+            {% csrf_token %}
+            <p>    
+                <label for="name">Username:</label>
+                <input type="text" name="name"  placeholder="Enter username">
+            </p>
+            <p>
+                <label for="password">Password:</label>
+                <input type="password" name="password" placeholder="Enter password">
+            </p>        
+            <input type="submit" value="Login">
+        </form>
+    {% endif %}
 </div>
 {% endblock %}
