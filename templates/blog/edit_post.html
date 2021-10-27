@@ -34,6 +34,7 @@
             <p><label>Post written by:</label> {{ post_form.instance.author }}</p>
             <p><label>Created at:</label> {{ post_form.instance.created_at }}</p>
             <p><label>Updated at:</label> {{ post_form.instance.updated_at }}</p>
+            <p><label>Post views:</label> {{ post_form.instance.visit }}</p>
         {% endif %}
     </form>
 {% else %}

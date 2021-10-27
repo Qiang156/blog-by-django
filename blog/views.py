@@ -12,11 +12,14 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 
 def index(request,category=0,user=''):
-    posts = Post.objects.all().order_by('-created_at')
+    posts = Post.objects.all().filter(status=1).order_by('-created_at')
+    list_title = "All blog posts"
     if category:
+        list_title = "Posts in category '" + category.capitalize() + "'"
         category = Category.objects.filter(name=category)
         posts = posts.filter(category=category)
     if user:
+        list_title = "Posts by user '" + user + "'"
         user = User.objects.filter(username=user)
         posts = posts.filter(author=user)
     
@@ -31,7 +34,7 @@ def index(request,category=0,user=''):
        # If page is out of range deliver last page of results
         posts_pag = paginator.page(paginator.num_pages)
 
-    context = { "posts" : posts, 'posts_pag': posts_pag} 
+    context = { "posts" : posts, 'posts_pag': posts_pag, 'list_title': list_title } 
     return render(request, "blog/index.html", context )
 
 

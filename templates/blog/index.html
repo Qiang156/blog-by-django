@@ -1,14 +1,12 @@
 {% extends "blog/base.html" %}
 
-{% block title %}Index page{% endblock %}
+{% block title %}{{ list_title }}{% endblock %}
 
 {% block page_content %}
-          
+    <h1>{{ list_title }}</h1>      
     {% for post in posts_pag %}
-        {% if post.status == 1 %}
         <article class="blog-post"> 
             <h2 class="blog-post-title">{{post.title}}</h2> 
-
             <p class="blog-post-meta">
              Created on {{ post.created_at|date:"Y-m-d H:i"}} by <a href="/blog/user/{{post.author}}">{{post.author}}</a> in <a href="/blog/category/{{post.category}}">{{ post.category|capfirst }}</a> <span>Visited {{post.visit}}</span> times</p>
             <p>{{post.body|striptags|slice:"500"}}...</p>
@@ -20,10 +18,5 @@
             </p>
         </article>
         <hr />
-        {% endif %}
     {% endfor %}
-
-   
-
-
 {% endblock %}
