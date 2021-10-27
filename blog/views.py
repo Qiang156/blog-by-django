@@ -3,6 +3,7 @@ from django.urls  import reverse
 from django.core.exceptions import PermissionDenied
 from blog.forms import PostForm, UserLoginForm, UserRegisterForm
 from blog.models import Post, Category
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 ##for login/logout
 from django.contrib.auth.models import User
@@ -19,27 +20,29 @@ def index(request,category=0,user=''):
         user = User.objects.filter(username=user)
         posts = posts.filter(author=user)
     
-    context = { "posts" : posts} 
+    paginator = Paginator(posts,10) 
+    page = request.GET.get('page')
+    try:
+        posts_pag = paginator.page(page)
+    except PageNotAnInteger:
+       # If page is not an integer deliver the first page
+        posts_pag = paginator.page(1)
+    except EmptyPage:
+       # If page is out of range deliver last page of results
+        posts_pag = paginator.page(paginator.num_pages)
+
+    context = { "posts" : posts, 'posts_pag': posts_pag} 
     return render(request, "blog/index.html", context )
 
 
-def home(request,category=0,user=''):
+def home(request):
     posts_list = Post.objects.filter(status='1').order_by('-created_at')[0:3]
-    user_list = User.objects.filter(is_superuser=False).order_by('username')
-    category_list = Category.objects.all()
-
-    if category:
-        category = Category.objects.filter(name=category)
-        posts = posts_list.filter(category=category)
-    if user:
-        user = User.objects.filter(username=user)
-        posts_list = posts_list.filter(author=user)
-    context = {'category_list': category_list, "posts_list" : posts_list ,'user_list':user_list }
+    context = {"posts_list" : posts_list  }
     return render(request, "blog/home.html", context )
 
 # To do: Later, when user can log in, we should add decorator @login_required
 # Now == Later. Login functionality has been added 
-@login_required
+@login_required(login_url='/blog/login')
 def edit_post(request, pk=0):
     # Same function for adding new blog post and editing existing blog post
     # And yes, maybe the code can be more efficient or shorter,
