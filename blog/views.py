@@ -46,7 +46,7 @@ def home(request):
 # To do: Later, when user can log in, we should add decorator @login_required
 # Now == Later. Login functionality has been added 
 @login_required(login_url='/blog/login')
-def edit_post(request, pk=0):
+def edit(request, pk=0):
     # Same function for adding new blog post and editing existing blog post
     # And yes, maybe the code can be more efficient or shorter,
     # but the structure used is to make it clearer for human readers
@@ -57,19 +57,19 @@ def edit_post(request, pk=0):
     logged_in_user = request.user
 
     if pk == "":
-        # The url was /blog/edit_post/, without any pk value
+        # The url was /blog/edit/, without any pk value
         # Show a list of this user's posts
         list_of_posts_by_user = Post.objects.filter(author=logged_in_user).order_by("-created_at")
         context = { "list_of_posts_by_user": list_of_posts_by_user }
     else:
         # Create or edit a single post
         if pk == "0":
-            # The url was /blog/edit_post/0
+            # The url was /blog/edit/0
             # We are about to add a new blog post
             if request.method == "GET":
                 # Just show empty form for user to fill out
                 post_form = PostForm()
-                post_form_action = reverse("blog:edit_post") + "0"
+                post_form_action = reverse("blog:edit") + "0"
             elif request.method == "POST":
                 # Save form data entered by user
                 post_form = PostForm(request.POST)
@@ -77,7 +77,7 @@ def edit_post(request, pk=0):
                     post = post_form.save(commit=False)
                     post.author = logged_in_user
                     post.save()
-                    return HttpResponseRedirect(reverse("blog:edit_post") + str(post.id))
+                    return HttpResponseRedirect(reverse("blog:edit") + str(post.id))
                 else:
                     # Oops, some error, add handler later
                     pass
@@ -85,20 +85,20 @@ def edit_post(request, pk=0):
                 # Some unknown method used, handle that later
                 pass
         else:
-            # The url was /blog/edit_post/[number], with a pk value
+            # The url was /blog/edit/[number], with a pk value
             # We are about to edit an existing blog post
             post = get_object_or_404(Post, pk=pk)
             if post.author == logged_in_user:
                 if request.method == "GET":
                     # Just show form for user to edit
                     post_form = PostForm(instance=post)
-                    post_form_action = reverse("blog:edit_post") + str(pk)
+                    post_form_action = reverse("blog:edit") + str(pk)
                 elif request.method == "POST":
                     # Save form data edited by user
                     post_form = PostForm(request.POST, instance=post)
                     if post_form.is_valid():
                         post = post_form.save(commit=True)
-                        return HttpResponseRedirect(reverse("blog:edit_post") + str(pk))
+                        return HttpResponseRedirect(reverse("blog:edit") + str(pk))
                     else:
                         # Oops, some error, add handler later
                         pass
@@ -110,27 +110,14 @@ def edit_post(request, pk=0):
                 raise PermissionDenied()
         context = { "post_form": post_form, "post_form_action": post_form_action }
 
-    # Finally, render the page using template edit_post.html
-    return render(request, "blog/edit_post.html", context)
- 
-def post_list(request):
-    list_of_posts = Post.objects.order_by("created_at")
-    context = { "posts" : list_of_posts }
-    return render(request, 'blog/post_list.html', context)
-    
-def post_detail(request, id):
+    # Finally, render the page using template edit.html
+    return render(request, "blog/edit.html", context)
+
+def view(request, id):
     post = get_object_or_404(Post, pk=id)
-    return render(request, 'blog/detail.html', {'post': post})
-
-def user_show(request, id):    
-    post = get_object_or_404(User, pk=id)
-    return render(request, 'blog/user.html', {'post': post})
-
-def getPost(request, post_id):
-    currentPost = Post.objects.get(id = post_id)
-    currentPost.visited()
-    context = {'post':currentPost}
-    return render(request, 'blog/viewPost.html', context)
+    post.visited()
+    context = {'post':post}
+    return render(request, 'blog/view.html', context)
     
 def user_login(request):
     error = False   ## flag errors
