@@ -125,8 +125,9 @@ def user_show(request, id):
 
 def getPost(request, post_id):
     currentPost = Post.objects.get(id = post_id)
-    currentPost.increase_visiting()
-    return render(request, 'blog/viewPost.html', locals())
+    currentPost.visited()
+    context = {'post':currentPost}
+    return render(request, 'blog/viewPost.html', context)
     
 def user_login(request):
     error = False   ## flag errors

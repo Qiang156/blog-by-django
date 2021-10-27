@@ -3,24 +3,15 @@
 
 {% block page_content %}
 
-<h1 style="text-align: center;">Welcome to Read This Blog</h1> 
-
-
 <div class="container">
     <div class="row">
         <div class="col-lg-12"> 
             <h1>{{ post.title }}</h1>
-                <p>
-                    <strong>{{ post.author }}</strong>
-                        &nbsp;&nbsp;&nbsp;&nbsp;{{ post.created_at|date:'Ymd' }}
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="{% url 'blog:category' post.category.id %}">Category: {{post.category}}</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;Click tims:{{ post.visiting }}
-                        <hr/>
-                
-                <p>
-                    {{ post.body }}
-            
+            <p class="blog-post-meta">
+            Created on {{ post.created_at|date:"Y-m-d H:i"}} by <a href="/blog/user/{{post.author}}">{{post.author}}</a> in <a href="/blog/category/{{post.category}}">{{ post.category|capfirst }}</a> <span>Visited {{post.visit}}</span> times
+            </p>
+            <hr/>    
+            <p>{% autoescape off %}{{ post.body }}{% endautoescape %}</p>
         </div>    
     </div>
 </div>

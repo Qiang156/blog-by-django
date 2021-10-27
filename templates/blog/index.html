@@ -10,12 +10,8 @@
             <h2 class="blog-post-title">{{post.title}}</h2> 
 
             <p class="blog-post-meta">
-            <a href="/blog/category/{{post.category}}">{{ post.category|capfirst }}</a> / 
-            {{ post.created_at|date:"Y-m-d H:i"}} 
-            by <a href="/blog/user/{{post.author}}">{{post.author}}</a>&nbsp&nbsp&nbsp&nbsp&nbsp
-            <a>Click tims: {{post.visiting}}</a>
-            </p>
-            <p>{{post.body|slice:"300"}}</p>
+             Created on {{ post.created_at|date:"Y-m-d H:i"}} by <a href="/blog/user/{{post.author}}">{{post.author}}</a> in <a href="/blog/category/{{post.category}}">{{ post.category|capfirst }}</a> <span>Visited {{post.visit}}</span> times</p>
+            <p>{{post.body|striptags|slice:"500"}}...</p>
             <p>
             <a href="/blog/getPost/{{post.id}}" class="btn btn-primary">Read...</a>
             {% ifequal user post.author  %}
