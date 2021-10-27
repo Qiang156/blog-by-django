@@ -22,7 +22,7 @@ label{
     font-size: 40px;
     font-size: 4rem;
     font-family: "Roboto", Corbel, Avenir, "Lucida Grande", "Lucida Sans", sans-serif;
-    background: url("/static/logo-django.svg") center center no-repeat;
+    background: url("/static/blog-logo.png") center center no-repeat;
     color: #FFF;
     display: block;
     float: left;
@@ -32,7 +32,7 @@ label{
     text-decoration: none;
     text-indent: 100%;
     width: 104px;
-    height: 36px;
+    height: 46px;
 }
 
 .post-container {

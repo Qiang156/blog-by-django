@@ -35,7 +35,8 @@ class Post(models.Model):
                              max_length=100,
                              blank=False,
                              null=False)
-
+    
+    visit = models.PositiveIntegerField(default=0,verbose_name="Visit")
     body = models.TextField(verbose_name="Content")
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -58,6 +59,10 @@ class Post(models.Model):
 
     def getStatus(self):
         return STATUS_CHOICE[self.status][1]
+
+    def visited(self):
+        self.visit += 1
+        self.save(update_fields=['visit'])
 
     class Meta:
         db_table = "blog_posts"
