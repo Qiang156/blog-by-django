@@ -13,3 +13,20 @@ label{
 .errorlist{
     color: rgb(200, 0, 0);
 }
+
+.logo {
+    font-size: 40px;
+    font-size: 4rem;
+    font-family: "Roboto", Corbel, Avenir, "Lucida Grande", "Lucida Sans", sans-serif;
+    background: url("/static/logo-django.svg") center center no-repeat;
+    color: #FFF;
+    display: block;
+    float: left;
+    font-weight: 700;
+    margin: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    text-indent: 100%;
+    width: 104px;
+    height: 36px;
+}
