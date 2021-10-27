@@ -4,12 +4,13 @@
 {% block page_content %}
 
     <div class="post-header">
-        <h2>{{post.title}}</a></h2>
-        <h6>Author: <i class="post-author">{{post.author}}</i></h5>    
-        <h6>Posted: {{ post.created_at|date:"Y-m-d H:i"}} by <a href="/blog/user/{{post.author}}">{{post.author}}</a> in <a href="/blog/category/{{post.category}}">{{ post.category|capfirst }}</a> <span>Visited {{post.visit}}</span> times</h6>   
+        <h2>{{post.title}}</a></h2>   
+        <h6>Created on {{ post.created_at|date:"Y-m-d H:i"}} by <a href="/blog/user/{{post.author}}">{{post.author}}</a> in <a href="/blog/category/{{post.category}}">{{ post.category|capfirst }}</a> <span>Visited {{post.visit}}</span> times</h6>
     </div>                      
 
     <div class="post-body">
         {% autoescape off %}{{post.body}}{% endautoescape %}
     </div>
 
+
+{% endblock %}

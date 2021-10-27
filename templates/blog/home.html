@@ -22,14 +22,14 @@
                 <h3 class='pb-4 border-bottom' style=' padding-left: 15px; '>Read all posts <a href="{% url 'index' %}"><small>Click here...</small></a> </h3>
 
 
-                <h3 class='pb-4 border-bottom' style=' padding-left: 15px; '>Latest posts on the blog </h3>
+                <h3 class='pb-4 border-bottom' style=' padding-left: 15px; '>Latest posts</h3>
                
                
                                 
                     {% for post in posts_list %}
                     
                     <article class ='blog-post bg-light rounded border border-light mb-2 p-5'>
-                     <h1 class='blog-post-title'><a href="{% url 'blog:getPost' post.id %}">{{ post.title }}</a></h1>   
+                     <h1 class='blog-post-title'><a href="{% url 'blog:view' post.id %}">{{ post.title }}</a></h1>   
                     <p class ="blog-post-meta">
                     Created on {{ post.created_at|date:"Y-m-d H:i"}} by <a href="/blog/user/{{post.author}}">{{post.author}}</a> in <a href="/blog/category/{{post.category}}">{{ post.category|capfirst }}</a>
                     </p>

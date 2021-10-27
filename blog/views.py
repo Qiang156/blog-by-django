@@ -126,7 +126,7 @@ def user_show(request, id):
     post = get_object_or_404(User, pk=id)
     return render(request, 'blog/user.html', {'post': post})
 
-def getPost(request, post_id):
+def view(request, post_id):
     currentPost = Post.objects.get(id = post_id)
     currentPost.visited()
     context = {'post':currentPost}
