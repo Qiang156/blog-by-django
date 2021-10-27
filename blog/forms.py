@@ -7,7 +7,7 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = "__all__"
         # author will be set by the code to logged in user
-        # visit should not be possible to change in edit_post
+        # visit should not be possible to change in edit
         exclude = ["author", "visit"] 
 
 class UserLoginForm(forms.ModelForm):
