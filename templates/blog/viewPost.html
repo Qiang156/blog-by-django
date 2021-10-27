@@ -16,10 +16,7 @@
             </div>
         </div>
         <div style="margin: 15px; height: 100px; display: inline-block;">
-            <div style="overflow: hidden; text-overflow: ellipsis; 
-                        display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical;">
-                        {% autoescape off %}{{post.body}}{% endautoescape %}
-            </div>
+            {% autoescape off %}{{post.body}}{% endautoescape %}
         </div>
     </div>                
 </div>

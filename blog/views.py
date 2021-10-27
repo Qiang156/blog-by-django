@@ -11,10 +11,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 
 def index(request,category=0,user=''):
-    category_list = Category.objects.all()
-    user_list = User.objects.filter(is_superuser=False).order_by('username')
     posts = Post.objects.all().order_by('-created_at')
-    
     if category:
         category = Category.objects.filter(name=category)
         posts = posts.filter(category=category)
@@ -22,7 +19,7 @@ def index(request,category=0,user=''):
         user = User.objects.filter(username=user)
         posts = posts.filter(author=user)
     
-    context = { "posts" : posts, 'category_list': category_list,'user_list':user_list} 
+    context = { "posts" : posts} 
     return render(request, "blog/index.html", context )
 
 # To do: Later, when user can log in, we should add decorator @login_required
