@@ -2,12 +2,11 @@
 {% load staticfiles %}
 
 {% block page_content %}
-<div class="container m-auto">
     {% if error %}
-        <h2 class="mb-5">{{ message }}</h2>
+        <h2>{{ message }}</h2>
     {% else %}
-        <h2 class="mb-5">Blog Login</h2>
-        <form action="{% url 'blog:login' %}" method="POST">
+        <h2>Blog Login</h2>
+        <form class="my-5" action="{% url 'blog:login' %}" method="POST">
             {% csrf_token %}
             <p>    
                 <label for="name">Username:</label>
@@ -17,8 +16,7 @@
                 <label for="password">Password:</label>
                 <input type="password" name="password" placeholder="Enter password">
             </p>        
-            <input type="submit" value="Login">
+            <input class="my-3 px-4 py-1" type="submit" value="Login">
         </form>
     {% endif %}
-</div>
 {% endblock %}

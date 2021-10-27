@@ -2,40 +2,14 @@
 {% block page_title %}Index page{% endblock %}
 {% block page_content %}
 
+    <div class="post-header">
+        <h2>{{post.title}}</a></h2>
+        <h6>Author: <i class="post-author">{{post.author}}</i></h5>    
+        <h6>Posted: {{post.created_at}}</h6>   
+    </div>                      
 
-
-<div class="row">      
-    <div style="border-style: solid; margin: 10px;">
-        <h3 style="text-align: center;">{{post.title}}</a></h3>
-        <div style="margin-left: 15px;">
-            <h5 style="text-align: left;">Author: <i>{{post.author}}</i></h5>                               
-        </div>
-        <div style="margin-left: 15px;margin-right: 15px; display: block;">
-            <div style="text-align: left; display: inline-block;">
-                <h6>Date: {{post.created_at}}</h6>
-            </div>
-        </div>
-        <div style="margin: 15px; height: 100px; display: inline-block;">
-            {% autoescape off %}{{post.body}}{% endautoescape %}
-        </div>
-    </div>                
-</div>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <div class="post-body">
+        {% autoescape off %}{{post.body}}{% endautoescape %}
+    </div>
 
 {% endblock %}
