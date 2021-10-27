@@ -22,6 +22,21 @@ def index(request,category=0,user=''):
     context = { "posts" : posts} 
     return render(request, "blog/index.html", context )
 
+
+def home(request,category=0,user=''):
+    posts_list = Post.objects.filter(status='1').order_by('-created_at')[0:3]
+    user_list = User.objects.filter(is_superuser=False).order_by('username')
+    category_list = Category.objects.all()
+
+    if category:
+        category = Category.objects.filter(name=category)
+        posts = posts_list.filter(category=category)
+    if user:
+        user = User.objects.filter(username=user)
+        posts_list = posts_list.filter(author=user)
+    context = {'category_list': category_list, "posts_list" : posts_list ,'user_list':user_list }
+    return render(request, "blog/home.html", context )
+
 # To do: Later, when user can log in, we should add decorator @login_required
 # Now == Later. Login functionality has been added 
 @login_required
