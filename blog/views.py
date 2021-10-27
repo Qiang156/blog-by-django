@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.core.urlresolvers import reverse
+from django.urls  import reverse
 from django.core.exceptions import PermissionDenied
 from blog.forms import PostForm, UserLoginForm, UserRegisterForm
 from blog.models import Post, Category
@@ -122,7 +122,8 @@ def user_show(request, id):
 
 def getPost(request, post_id):
     currentPost = Post.objects.get(id = post_id)
-    return render(request, 'blog/viewPost.html', context={'post': currentPost})
+    currentPost.increase_visiting()
+    return render(request, 'blog/viewPost.html', locals())
     
 def user_login(request):
     error = False   ## flag errors
