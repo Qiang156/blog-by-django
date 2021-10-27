@@ -39,7 +39,7 @@ def home(request,category=0,user=''):
 
 # To do: Later, when user can log in, we should add decorator @login_required
 # Now == Later. Login functionality has been added 
-@login_required
+@login_required(login_url='/blog/login')
 def edit_post(request, pk=0):
     # Same function for adding new blog post and editing existing blog post
     # And yes, maybe the code can be more efficient or shorter,
