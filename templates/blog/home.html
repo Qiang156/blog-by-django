@@ -28,17 +28,15 @@
                                 
                     {% for post in posts_list %}
                     
-                    <article class ='blog-post bg-light rounded border border-light ' style=' padding-left: 15px; padding-right: 15px;' >
-                     <h1 class='blog-post-title'  ><a href="{% url 'blog:getPost' post.id %}">{{ post.title }}</a></h1>   
+                    <article class ='blog-post bg-light rounded border border-light mb-2 p-5'>
+                     <h1 class='blog-post-title'><a href="{% url 'blog:getPost' post.id %}">{{ post.title }}</a></h1>   
                     <p class ="blog-post-meta">
                     Created on {{ post.created_at|date:"Y-m-d H:i"}} by <a href="/blog/user/{{post.author}}">{{post.author}}</a> in <a href="/blog/category/{{post.category}}">{{ post.category|capfirst }}</a>
                     </p>
                                        
-                    {{post.body|safe }} </br>
-                                 
-                                   
+                    {{post.body|safe }}           
                     </article>
-                    <br>
+                    
                     {% endfor %}
              
                 
