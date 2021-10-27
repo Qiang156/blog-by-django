@@ -6,10 +6,10 @@ from blog import views
 app_name='blog'
 
 urlpatterns = [
-    url(r'^$', views.index, name="index"),
+    url(r'^$', views.index),
     
     url("index", views.index, name="index"),
-    url(r'^category/(?P<category>\w+)/', views.index),
+    url(r'^category/(?P<category>\w+)/', views.index, name="category"),
     url(r"^user/(?P<user>\w+)/", views.index),
 
     url(r'^home/', views.home, name="home"),
