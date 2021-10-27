@@ -34,3 +34,22 @@ label{
     width: 104px;
     height: 46px;
 }
+
+.post-container {
+    background:#f8f6f6;
+}
+
+.post-header{
+    margin: 15px 0 30px 0;
+    border-bottom: 1px solid #808080;
+}
+
+.post-author{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.blog-post {
+    overflow: hidden;
+}
+
