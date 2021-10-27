@@ -9,12 +9,12 @@
 {% block page_content %}
 {% if list_of_posts_by_user %}
     <h1>Posts by {{ request.user }}</h1>
-    <p><a href="/blog/edit_post/0">Create a new post</a>, or edit an old one in the list below.</p>
+    <p><a href="/blog/edit/0">Create a new post</a>, or edit an old one in the list below.</p>
     {% if list_of_posts_by_user|length > 0 %}
         <ul>
             {% for post in list_of_posts_by_user %}
             <li>
-                <a href="/blog/edit_post/{{post.id}}">{{ post.title }}</a> (created {{ post.created_at }})
+                <a href="/blog/edit/{{post.id}}">{{ post.title }}</a> (created {{ post.created_at }})
             </li>
             {% endfor %}
         </ul>

@@ -13,7 +13,7 @@
             <p>
             <a href="/blog/view/{{post.id}}" class="btn btn-primary">Read...</a>
             {% ifequal user post.author  %}
-            <a href="/blog/edit_post/{{post.id}}" class="btn btn-warning">Edit</a>
+            <a href="/blog/edit/{{post.id}}" class="btn btn-warning">Edit</a>
             {% endifequal %}
             </p>
         </article>

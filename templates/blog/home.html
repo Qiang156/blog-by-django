@@ -2,27 +2,26 @@
 
 {% block page_content %}
        
-        <div class = "p-4 p-md-5 mb-4 text-white rounded bg-dark ">
-        <div class="row">
+<div class = "p-4 p-md-5 mb-4 text-white rounded bg-dark ">
+    <div class="row">
         <div class = "col-md-6 ">
-       <h1 class="display-4 ">Welcome to our Django Blog Project </h1>   
-       <p class ="lead my-3">  We are Team1 from Python and It Security course at Lexicon. <br> As a group project we used Django to create a blog.  </p>
-       
+            <h1 class="display-4 ">Welcome to our Django Blog Project </h1>   
+            <p class ="lead my-3">  We are Team1 from Python and It Security course at Lexicon. <br> As a group project we used Django to create a blog.  </p>
         </div>
          
         <div class = "col-md-6 col-md-offset text-center mx-auto">
-       {% load static %}
-        <img src="{% static "Django_logo.png" %}" alt="Django" />
-        <img src="{% static "Python_logo.png" %}" alt="Python"/>
+        {% load static %}
+            <img src="{% static "Django_logo.png" %}" alt="Django" />
+            <img src="{% static "Python_logo.png" %}" alt="Python"/>
         </div>
-        </div>
-        </div>
-        <div class= "row g-5">
-              <div class="col-md-8">
-                <h3 class='pb-4 border-bottom' style=' padding-left: 15px; '>Read all posts <a href="{% url 'index' %}"><small>Click here...</small></a> </h3>
+    </div>
+</div>
+        
+<div class= "row g-5">
+    <div class="col-md-8">
+        <h3 class='pb-4 border-bottom' style=' padding-left: 15px; '>Read all posts <a href="{% url 'index' %}"><small>Click here...</small></a></h3>
 
-
-                <h3 class='pb-4 border-bottom' style=' padding-left: 15px; '>Latest posts</h3>
+        <h3 class='pb-4 border-bottom' style=' padding-left: 15px; '>Latest posts</h3>
                
                
                                 

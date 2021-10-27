@@ -12,10 +12,8 @@ urlpatterns = [
     url(r"^user/(?P<user>\w+)/", views.index),
     url(r'^home/', views.home, name="home"),
 
-    url("edit_post/(?P<pk>\d*)?", views.edit_post, name="edit_post"),
-    # url(r'^post_list/', views.post_list, name="post_list"),
-    # url(r'^(?P<pk>\d+)', views.post_detail, name='post_detail'),
-    url(r'^view/(?P<post_id>\d+)', views.view, name="view"),
+    url("edit/(?P<pk>\d*)?", views.edit, name="edit"),
+    url(r'^view/(?P<id>\d+)', views.view, name="view"),
     
     url(r'^register/', views.register, name='register'),
     url(r'^login/', views.user_login, name="login"),
