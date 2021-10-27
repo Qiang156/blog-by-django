@@ -39,11 +39,6 @@
                         {% endfor %}
                         </div>
                     </li>
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'blog:edit_post' %}">My blog posts</a>
-                    </li>
-                    {% endif %}
                 </ul>
 
                 <ul class="navbar-nav ml-auto">                    
