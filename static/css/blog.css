@@ -2,8 +2,17 @@ body{
     padding-top: 70px; /* Needed when using navbar with class=fixed-top */
 }
 
-.foot {
+footer {
+    clear: both;
+    position: relative;
+    margin-top: -45px;
     border-top: solid 1px #808080;
+}
+
+div.copyright {
+    background-color: #444; color: #fff;
+    height:45px;
+    line-height: 45px;
 }
 
 label{
