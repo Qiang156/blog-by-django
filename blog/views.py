@@ -114,7 +114,7 @@ def edit(request, pk=0):
     return render(request, "blog/edit.html", context)
 
 def view(request, id):
-    post = get_object_or_404(Post, pk=id)
+    post = get_object_or_404(Post, pk=id, status=1)
     post.visited()
     context = {'post':post}
     return render(request, 'blog/view.html', context)
