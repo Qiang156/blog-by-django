@@ -3,7 +3,7 @@ body{
 }
 
 .foot {
-    background-color:#efefef;
+    border-top: solid 1px #808080;
 }
 
 label{
