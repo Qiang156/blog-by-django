@@ -1,31 +1,38 @@
-<footer class="container py-3">
-    <div class="row bg-light py-3">
-        <div class="col">
-            <h3>Quick links</h3>
-            <ul>
-                <li><a href="{% url 'blog:home' %}">Home</a></li>
-                <li><a href="{% url 'blog:index' %}">All posts</a></li>
-                
-            </ul>
+<footer class="footer navbar-fixed-bottom mt-2">
+    <div class="container">
+        <div class="p-4 p-md-5 bg-light">
+            <div class="row">
+                <div class="col">
+                    <h3>Quick links</h3>
+                    <ul style="padding-left:20px;">
+                        <li><a href="{% url 'blog:home' %}">Home</a></li>
+                        <li><a href="{% url 'blog:index' %}">All posts</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>About</h3>
+                    <ul>
+                        <p>This fantastic blog is made by five Django enthusiasts, who put together a lot of hard work and efford to make this thing running</p>
+                    </ul>
+                </div>
+            </div>    
+            <div class="row ">
+                <div class="col">
+                    Template based on <a href="https://getbootstrap.com/docs/5.1/examples/blog" target="_blank">Bootstrap</a>
+                </div>
+                <div class="col-6 text-right">
+                    <a href="#">Back to top</a>
+                </div>
+            
+            </div>
         </div>
-        <div class="col">
-            <h3>About</h3>
-            <ul>
-                <p>This fantastic blog is made by five Django enthusiasts, who put together a lot of hard work and efford to make this thing running</p>
-            </ul>
-        </div>
+        
     </div>
-
-    <div class="row bg-light">
-
-        <div class="col-sm-12 col-md-6">
-            Template based on <a href="https://getbootstrap.com/docs/5.1/examples/blog" target="_blank">Bootstrap</a>
+    <div class="container-fluid bg-light">
+        <div class="row">
+            <div class="col text-center copyright">
+                &copy; 2021 Team1 All Rights Reserved
+            </div>
         </div>
-        <div class="col-sm-12 col-md-6 text-right">
-            <a href="#">Back to top</a>
-        </div>
-        <div class="col text-center copyright">
-            &copy; 2021 Team1 All Rights Reserved
-        </div> 
     </div>
 </footer>

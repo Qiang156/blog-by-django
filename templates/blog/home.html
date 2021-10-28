@@ -1,8 +1,10 @@
+
 {% extends "blog/base.html" %}
+{% load static %}
 
 {% block page_content %}
        
-<div class = "p-4 p-md-5 mb-4 text-white rounded bg-dark ">
+<div class="p-4 p-md-5 mb-4 text-white rounded bg-dark ">
     <div class="row">
         <div class = "col-md-6 ">
             <h1 class="display-4 ">Welcome to our Django Blog Project </h1>   
@@ -10,7 +12,6 @@
         </div>
          
         <div class = "col-md-6 col-md-offset text-center mx-auto">
-        {% load static %}
             <img src="{% static "Django_logo.png" %}" alt="Django" />
             <img src="{% static "Python_logo.png" %}" alt="Python"/>
         </div>
@@ -22,47 +23,32 @@
         <h3 class='pb-4 border-bottom' style=' padding-left: 15px; '>Read all posts <a href="{% url 'blog:index' %}"><small>Click here...</small></a></h3>
 
         <h3 class='pb-4 border-bottom' style=' padding-left: 15px; '>Latest posts</h3>
-               
-               
-                                
-                    {% for post in posts_list %}
-                    
-                    <article class ='blog-post bg-light rounded border border-light mb-2 p-5'>
-                     <h1 class='blog-post-title'><a href="{% url 'blog:view' post.id %}">{{ post.title }}</a></h1>   
-                    <p class ="blog-post-meta">
-                    Created on {{ post.created_at|date:"Y-m-d H:i"}} by <a href="/blog/user/{{post.author}}">{{post.author}}</a> in <a href="/blog/category/{{post.category}}">{{ post.category|capfirst }}</a>
-                    </p>
-                                       
-                    {{post.body|safe }}           
-                    </article>
-                    
-                    {% endfor %}
-             
-                
-            
-            </div>
-        <div class="col-md-4">
-            <div class="position sticky" style="top: 2rem;">
-                <div class="p-4 mb-3 bg-light rounded">
-                    <h4 class ="fst-italic">About Django</h4>
-                    <p class="mb-0">Django is a Python-based free and open-source web framework that 
-                        follows the model–template–views (MTV) architectural pattern.<br>
-                        <h5>What is MTV</h5>
-                        <p> <em>Model:</em> definitive source of information about your data.  </p>
-                        <p> <em>Template:</em> is a text files,  It can generate any text-based format (HTML, XML, CSV, etc.).  </p>
-                        <p> <em>Views:</em> Python functions or classes that receive a web request and return a web response.  </p>
-                    </p>
-
-             
-
+                              
+        {% for post in posts_list %}
+        <article class ='blog-post bg-light rounded border border-light mb-2 p-5'>
+            <h1 class='blog-post-title'><a href="{% url 'blog:view' post.id %}">{{ post.title }}</a></h1>   
+            <p class ="blog-post-meta">
+            Created on {{ post.created_at|date:"Y-m-d H:i"}} by <a href="/blog/user/{{post.author}}">{{post.author}}</a> in <a href="/blog/category/{{post.category}}">{{ post.category|capfirst }}</a>
+            </p>
+            {{ post.body|safe }}           
+        </article>
+        {% endfor %}
+    </div>
+        
+    <div class="col-md-4">
+        <div class="position sticky" style="top: 2rem;">
+            <div class="p-4 mb-3 bg-light rounded">
+                <h4 class ="fst-italic">About Django</h4>
+                <p class="mb-0">Django is a Python-based free and open-source web framework that follows the model–template–views (MTV) architectural pattern.</p>
+                <p>
+                    <h5>What is MTV</h5>
+                    <p> <em>Model:</em> definitive source of information about your data.  </p>
+                    <p> <em>Template:</em> is a text files,  It can generate any text-based format (HTML, XML, CSV, etc.).  </p>
+                    <p> <em>Views:</em> Python functions or classes that receive a web request and return a web response.  </p>
+                </p>
             </div>
 
         </div>    
-        </div> 
-                  
     </div>
-   
-
-
-
+</div>
 {% endblock %}
