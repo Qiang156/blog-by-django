@@ -114,7 +114,7 @@ def edit(request, pk=0):
     return render(request, "blog/edit.html", context)
 
 def view(request, id):
-    post = get_object_or_404(Post, pk=id, status=1)
+    post = get_object_or_404(Post, pk=id)
     post.visited()
     context = {'post':post}
     return render(request, 'blog/view.html', context)
@@ -133,13 +133,13 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect(reverse('index'))
+                return HttpResponseRedirect(reverse('blog:index'))
             else:
                 error = True
-                message = 'Account not Active'
+                message = 'Account not Active'                
         else:
             error = True
-            message = 'Login failed. Please verify your credentials'
+            message = 'Please verify your credentials'
     else:
         pass
 
@@ -151,7 +151,7 @@ def user_login(request):
 @login_required
 def user_logout(request):
     logout(request)
-    return HttpResponseRedirect(reverse('index'))
+    return HttpResponseRedirect(reverse('blog:index'))
 
 
 def register(request):
