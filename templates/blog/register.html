@@ -10,7 +10,7 @@
         <form class="my-5" endtype="multipart/form-data" method="POST">
             {% csrf_token %}
             {{ user_form.as_p }}
-            <input class="my-3 px-4 py-1" type="submit" name="" value="Register"> 
+            <input class="btn btn-warning my-3 px-4 py-2" type="submit" name="" value="Register"> 
         </form>
     {% endif %}
 
