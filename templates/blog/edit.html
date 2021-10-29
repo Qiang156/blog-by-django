@@ -9,12 +9,12 @@
 {% block page_content %}
 {% if list_of_posts_by_user %}
     <h1>Posts by {{ request.user }}</h1>
-    <p><a href="/blog/edit/0">Create a new post</a>, or edit an old one in the list below.</p>
+    <p><a href="/blog/edit/0" class="btn btn-warning">Create a new post</a> or edit an old one in the list below.</p>
     {% if list_of_posts_by_user|length > 0 %}
         <ul>
             {% for post in list_of_posts_by_user %}
             <li>
-                <a href="/blog/edit/{{post.id}}">{{ post.title }}</a> (created {{ post.created_at }})
+                <a href="/blog/edit/{{post.id}}">{{ post.title }}</a> (created {{ post.created_at|date:"Y-m-d H:i" }})
             </li>
             {% endfor %}
         </ul>
@@ -32,12 +32,12 @@
         <p><input type="submit" value="Save" class="btn btn-primary"></p>
         {% if post_form.instance.author %}
             <p><label>Post written by:</label> {{ post_form.instance.author }}</p>
-            <p><label>Created at:</label> {{ post_form.instance.created_at }}</p>
-            <p><label>Updated at:</label> {{ post_form.instance.updated_at }}</p>
+            <p><label>Created at:</label> {{ post_form.instance.created_at|date:"Y-m-d H:i" }}</p>
+            <p><label>Updated at:</label> {{ post_form.instance.updated_at|date:"Y-m-d H:i" }}</p>
             <p><label>Post views:</label> {{ post_form.instance.visit }}</p>
         {% endif %}
     </form>
 {% else %}
-    <p><a href="/blog/edit/0">Create a new post</a></p>
+    <p><a href="/blog/edit/0" class="btn btn-warning">Create a new post</a></p>
 {% endif %}
 {% endblock %}
