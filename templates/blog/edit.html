@@ -29,7 +29,7 @@
     <form action="{{ post_form_action }}" method="POST" novalidate>
         {{ post_form.as_p }}
         {% csrf_token %}
-        <p><input type="submit" value="Save" class="btn btn-primary"></p>
+        <p><input type="submit" value="Save" class="btn btn-warning"></p>
         {% if post_form.instance.author %}
             <p><label>Post written by:</label> {{ post_form.instance.author }}</p>
             <p><label>Created at:</label> {{ post_form.instance.created_at|date:"Y-m-d H:i" }}</p>
